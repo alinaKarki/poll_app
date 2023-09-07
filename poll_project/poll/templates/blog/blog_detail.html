@@ -1,0 +1,7 @@
+{% block content %}
+<h1>{{ blog.title }}</h1>
+<p>{{ blog.description }}</p>
+<p>Completed: {% if task.completed %}Yes{% else %}No{% endif %}</p>
+<a href="{% url 'blog_update' blog.pk %}">Edit task</a>
+<a href="{% url 'blog_delete' blog.pk %}">Delete task</a>
+{% endblock %}

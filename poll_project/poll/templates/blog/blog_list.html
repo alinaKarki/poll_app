@@ -1,0 +1,34 @@
+<!-- -->
+{% extends "poll/base.html" %}
+{% block main %}
+
+<center>
+    <h1>Your blogs</h1>
+    <form method="GET">
+      <input type="text" name="q" placeholder="Search blog">
+      <button type="submit">Search</button>
+  </form>
+    <a href="{% url 'blog_create' %}">Add Blog</a>
+      {% for blog in blogs %}
+      <div>
+        <div>
+          <h5>{{ blog.title }}</h5>
+          <p>{{ blog.description|truncatechars:50 }}</p>
+          <p>
+            <strong>Completed:</strong> 
+            {% if blog.completed %}Yes{% else %}No{% endif %}
+          </p>
+          <a href="{% url 'blog_detail' blog.pk %}">
+            Read more
+          </a> &nbsp;
+          <a href="{% url 'blog_delete' blog.pk %}">
+            Delete blog
+          </a>
+        </div>
+      </div>
+        {% empty %}
+          <h3>No blogs yet.</h3>
+          <a href="{% url 'blog_create' %}">Add blog</a>
+      {% endfor %}
+</center>
+{% endblock %}
